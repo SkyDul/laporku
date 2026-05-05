@@ -21,10 +21,11 @@ function getEnvVar($key, $default = null) {
 }
 
 function getDB() {
-    $host = getEnvVar('DB_HOST', '127.0.0.1');
-    $db   = getEnvVar('DB_NAME', 'lapor_ku');
-    $user = getEnvVar('DB_USER', 'root');
-    $pass = getEnvVar('DB_PASS', '');
+    // Sesuaikan key dengan yang ada di GitHub Secrets (image_e540fd.png)
+    $host = getEnvVar('DB_HOST', '127.0.0.1'); 
+    $db   = getEnvVar('DB_DATABASE', 'lapor_ku'); // Sebelumnya DB_NAME
+    $user = getEnvVar('DB_USERNAME', 'root');     // Sebelumnya DB_USER
+    $pass = getEnvVar('DB_PASSWORD', '');         // Sebelumnya DB_PASS[cite: 1]
     $charset = 'utf8mb4';
 
     $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
@@ -37,6 +38,7 @@ function getDB() {
     try {
         return new PDO($dsn, $user, $pass, $options);
     } catch (\PDOException $e) {
+        // Line 40 yang menyebabkan error[cite: 1]
         throw new \PDOException($e->getMessage(), (int)$e->getCode());
     }
 }
