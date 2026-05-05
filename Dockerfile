@@ -37,6 +37,7 @@ ARG CLOUDFRONT_DOMAIN
 ARG AWS_ACCESS_KEY_ID
 ARG AWS_SECRET_ACCESS_KEY
 ARG AWS_REGION
+ARG S3_BUCKET
 
 # Tulis ke .env agar fungsi getEnvVar di PHP bisa membacanya tanpa masalah Apache
 RUN echo "DB_HOST=${DB_HOST}" > /var/www/html/.env && \
@@ -47,6 +48,7 @@ RUN echo "DB_HOST=${DB_HOST}" > /var/www/html/.env && \
     echo "CLOUDFRONT_DOMAIN=${CLOUDFRONT_DOMAIN}" >> /var/www/html/.env && \
     echo "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}" >> /var/www/html/.env && \
     echo "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}" >> /var/www/html/.env && \
-    echo "AWS_REGION=${AWS_REGION}" >> /var/www/html/.env
+    echo "AWS_REGION=${AWS_REGION}" >> /var/www/html/.env && \
+    echo "S3_BUCKET=${S3_BUCKET}" >> /var/www/html/.env
 
 RUN chown www-data:www-data /var/www/html/.env
