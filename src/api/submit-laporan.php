@@ -47,7 +47,7 @@ try {
     $db->commit();
 
     // Redirect to tracking page with the ticket number
-    header('Location: ' . getEnvVar('APP_URL', '') . '/index.php?page=tracking&tiket=' . $nomor_tiket);
+    header('Location: /index.php?page=tracking&tiket=' . $nomor_tiket);
     exit;
 
 } catch (\Exception $e) {
