@@ -23,7 +23,7 @@ function getEnvVar($key, $default = null) {
 function getDB() {
     // Sesuaikan key dengan yang ada di GitHub Secrets (image_e540fd.png)
     $host = 'dblaporku.cn6woysaumir.ap-southeast-1.rds.amazonaws.com'; 
-    $db   = 'lapor_ku';
+    $db   = 'laporku';
     $user = 'admin';
     $pass = 'uts12345678';
     $charset = 'utf8mb4';
