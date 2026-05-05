@@ -22,10 +22,10 @@ function getEnvVar($key, $default = null) {
 
 function getDB() {
     // Sesuaikan key dengan yang ada di GitHub Secrets (image_e540fd.png)
-    $host = 'dblaporku.cn6woysaumir.ap-southeast-1.rds.amazonaws.com'; 
-    $db   = 'laporku';
-    $user = 'admin';
-    $pass = 'uts12345678';
+    $host = getEnvVar('DB_HOST', '127.0.0.1'); 
+    $db   = getEnvVar('DB_DATABASE', 'lapor_ku'); // Sebelumnya DB_NAME
+    $user = getEnvVar('DB_USERNAME', 'root');     // Sebelumnya DB_USER
+    $pass = getEnvVar('DB_PASSWORD', '');         // Sebelumnya DB_PASS
     $charset = 'utf8mb4';
 
     $dsn = "mysql:host=$host;dbname=$db;charset=$charset";

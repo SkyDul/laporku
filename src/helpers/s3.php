@@ -54,10 +54,10 @@ function uploadToS3($filePath, $fileName) {
             's3_key' => 'laporan/' . $fileName,
             'cloudfront_url' => $url
         ];
-    } catch (\Exception $e) {
+    } catch (\Throwable $e) {
         return [
             'success' => false,
-            'error' => $e->getMessage()
+            'error' => 'S3 Error: ' . $e->getMessage()
         ];
     }
     

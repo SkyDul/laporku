@@ -41,7 +41,23 @@ try {
                 $uploadResult['s3_key'] ?? '', 
                 $uploadResult['cloudfront_url'] ?? ''
             ]);
+        } else {
+            throw new \Exception('Gagal upload file: ' . ($uploadResult['error'] ?? 'Unknown error'));
         }
+    } elseif (isset($_FILES['lampiran']) && $_FILES['lampiran']['error'] !== UPLOAD_ERR_NO_FILE) {
+        // Jika ada error saat PHP menerima file (misal file terlalu besar)
+        $phpFileUploadErrors = [
+            UPLOAD_ERR_INI_SIZE   => 'File terlalu besar (melebihi upload_max_filesize di php.ini).',
+            UPLOAD_ERR_FORM_SIZE  => 'File terlalu besar (melebihi MAX_FILE_SIZE di HTML form).',
+            UPLOAD_ERR_PARTIAL    => 'File hanya terupload sebagian.',
+            UPLOAD_ERR_NO_FILE    => 'Tidak ada file yang diupload.',
+            UPLOAD_ERR_NO_TMP_DIR => 'Missing a temporary folder.',
+            UPLOAD_ERR_CANT_WRITE => 'Gagal menulis file ke disk.',
+            UPLOAD_ERR_EXTENSION  => 'A PHP extension stopped the file upload.',
+        ];
+        $errCode = $_FILES['lampiran']['error'];
+        $errMsg = $phpFileUploadErrors[$errCode] ?? 'Unknown upload error.';
+        throw new \Exception('Error upload PHP: ' . $errMsg);
     }
 
     $db->commit();
