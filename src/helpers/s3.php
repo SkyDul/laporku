@@ -43,7 +43,7 @@ function uploadToS3($filePath, $fileName) {
             'Bucket'     => $bucket,
             'Key'        => 'laporan/' . $fileName,
             'SourceFile' => $filePath,
-            'ACL'        => 'public-read'
+            #'ACL'        => 'public-read'
         ]);
 
         $cloudfrontDomain = getEnvVar('CLOUDFRONT_DOMAIN');
